@@ -8,7 +8,7 @@ One line for [Green Tests, Nothing Works: The Excuse Contest](https://make.fun/b
 
 ## Entry
 
-> All tests passed in 42 seconds; the release went out at noon; by 12:03 support had a ticket: 'I can see my neighbour's bank balance'.
+> 512 tests green, out at noon; 12:03, ticket #2208: 'Whose $9,300 is this in my account?' Staging had exactly one user.
 
 ## Run
 

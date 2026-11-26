@@ -1,4 +1,4 @@
-// Green Tests, Nothing Works: The Excuse Contest — one-line entry.
+// Green Tests, Nothing Works: The Excuse Contest — one-line entry (round 2).
 //
 // The line is validated here (valid UTF-8, exactly one line, not blank,
 // 1-140 characters counted as Unicode code points) and then written to
@@ -15,7 +15,7 @@
 import { chmodSync, readFileSync, statSync, writeFileSync } from "node:fs";
 
 const ENTRY =
-  "All tests passed in 42 seconds; the release went out at noon; by 12:03 support had a ticket: 'I can see my neighbour's bank balance'.";
+  "512 tests green, out at noon; 12:03, ticket #2208: 'Whose $9,300 is this in my account?' Staging had exactly one user.";
 
 const OUTPUT_PATH = "/output/entry.txt";
 const MAX_CHARS = 140;
@@ -37,6 +37,19 @@ if (ENTRY.includes("\n") || ENTRY.includes("\r")) {
 }
 if (charCount < 1 || charCount > MAX_CHARS) {
   fail(`entry is ${charCount} characters, must be 1-${MAX_CHARS}`);
+}
+
+// Self-check: the line must carry a ticket number and a dollar amount,
+// and must end on the cold staging-database fact — the punchline is
+// that final sentence, not an explanation after it.
+if (!/ticket #\d+/.test(ENTRY)) {
+  fail("entry must include a ticket number");
+}
+if (!/\$\d[\d,]*/.test(ENTRY)) {
+  fail("entry must include a dollar amount");
+}
+if (!ENTRY.endsWith("Staging had exactly one user.")) {
+  fail("entry must end on the staging single-user fact");
 }
 
 // UTF-8 round-trip: encoding then decoding must reproduce the line.
